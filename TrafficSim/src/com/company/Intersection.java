@@ -8,4 +8,9 @@ public class Intersection extends TrafficElement {
     protected Intersection(Point pos) {
         super(pos);
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

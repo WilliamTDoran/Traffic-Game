@@ -10,4 +10,9 @@ public abstract class TrafficElement {
     public TrafficElement(Point position) {
         mapPosition = position;
     }
+
+    @Override
+    public String toString() {
+        return "("+mapPosition.x+","+mapPosition.y+")";
+    }
 }
