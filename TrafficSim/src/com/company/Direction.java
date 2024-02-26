@@ -1,4 +1,8 @@
 package com.company;
 
-public class Direction {
+public enum Direction {
+    North,
+    South,
+    West,
+    East
 }
