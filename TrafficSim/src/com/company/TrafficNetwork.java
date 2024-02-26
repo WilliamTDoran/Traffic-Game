@@ -64,9 +64,9 @@ public class TrafficNetwork {
                     }
                 }
             }
-            for (int i = 0; i< intersectionNames.size() && i < intersections.size(); i++) {
+            /*for (int i = 0; i< intersectionNames.size() && i < intersections.size(); i++) {
                 System.out.println(intersectionNames.get(i) + ", " + intersections.get(i));
-            }
+            }*/
         } catch (FileNotFoundException e) {
             System.out.println("Error!");
             e.printStackTrace();
