@@ -10,6 +10,17 @@ public abstract class Vehicle
     private Reputation reputation;
     private DamageStatus damageStatus;
 
+    public Vehicle(MovementStatus ms, String color, Double size, Double weight, Double maxSpeed, Reputation rep, DamageStatus ds)
+    {
+        movementStatus = ms;
+        this.color = color;
+        this.size = size;
+        this.weight = weight;
+        this.maxSpeed = maxSpeed;
+        reputation = rep;
+        damageStatus = ds;
+    }
+
     public void move()
     {
 
