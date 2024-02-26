@@ -20,6 +20,7 @@ public class TrafficNetwork {
             Scanner readFile = new Scanner(file);
             ArrayList<String> intersectionNames = new ArrayList<>();
             intersections = new ArrayList<>();
+            roads = new ArrayList<>();
             while (readFile.hasNextLine()) {
                 String data = readFile.nextLine();
                 if (data.startsWith("[")) { // new intersection
@@ -37,7 +38,30 @@ public class TrafficNetwork {
                         System.out.println("Data set \"" + data + "\" does not contain valid data entries");
                     }
                 } else { // connects 2 intersections
-
+                    try {
+                        int end = data.indexOf(',');
+                        String intersectionFrom = data.substring(0, end);
+                        int start = end;
+                        end = data.indexOf(',', start+1);
+                        String intersectionTo = data.substring(start+2, end);
+                        int numLanes = Integer.parseInt(data.substring(end+2));
+                        start = -1;
+                        end = -1;
+                        for (int i = 0; i< intersectionNames.size() && i < intersections.size(); i++) {
+                            if (intersectionTo.equals(intersectionNames.get(i))) {
+                                end = i;
+                                if (start != -1) break;
+                            } else if (intersectionFrom.equals(intersectionNames.get(i))) {
+                                start = i;
+                                if (end != -1) break;
+                            }
+                        }
+                        if (intersections.get(start).mapPosition.x == intersections.get(end).mapPosition.x || intersections.get(start).mapPosition.y == intersections.get(end).mapPosition.y) {
+                            roads.add(new RoadSegment(intersections.get(start), intersections.get(end), numLanes));
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Data set \"" + data + "\" does not contain valid data entries");
+                    }
                 }
             }
             for (int i = 0; i< intersectionNames.size() && i < intersections.size(); i++) {
