@@ -21,8 +21,22 @@ public abstract class Vehicle
         damageStatus = ds;
     }
 
-    public void move()
+    public void move(boolean moving)
     {
+        if (moving)
+        {
+            movementStatus.setSpeed(maxSpeed);
+        }
+        else
+        {
+            movementStatus.setSpeed(0.0);
+        }
 
+        movementStatus.updatePosition();
+    }
+
+    public void AlterReputation(Double deltaRep)
+    {
+        reputation.setNiceness(reputation.getNiceness() + deltaRep);
     }
 }

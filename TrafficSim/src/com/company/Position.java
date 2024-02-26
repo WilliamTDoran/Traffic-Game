@@ -8,7 +8,7 @@ public class Position {
         return trafficElement;
     }
 
-    public Point getPosition() {
+    public Point getPoint() {
         return coordinate;
     }
 
