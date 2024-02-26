@@ -1,0 +1,9 @@
+[Interection1] (0, 0)
+[Bubbles] (5, 0)
+[idk] (5, 5)
+[theseAreNames] (0, 5)
+[CanBeWhatever] (-5, 0)
+Interection1, Bubbles
+Bubbles, idk
+idk, theseAreNames
+theseAreNames, Interection1

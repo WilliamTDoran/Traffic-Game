@@ -6,6 +6,7 @@ public class TrafficNetwork {
     ArrayList<RoadSegment> roads;
     ArrayList<Intersection> intersections;
 
+
     public int checkNumberVehiclesInSegment(RoadSegment roadSegment) {
         return 0;
     }
