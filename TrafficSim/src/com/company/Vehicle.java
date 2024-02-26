@@ -9,4 +9,9 @@ public abstract class Vehicle
     private Double maxSpeed;
     private Reputation reputation;
     private DamageStatus damageStatus;
+
+    public void move()
+    {
+
+    }
 }
