@@ -10,6 +10,9 @@ public abstract class Vehicle
     private Reputation reputation;
     private DamageStatus damageStatus;
 
+    public Double getWeight() { return weight; }
+    public MovementStatus getMovementStatus() { return movementStatus; }
+
     public Vehicle(MovementStatus ms, String color, Double size, Double weight, Double maxSpeed, Reputation rep, DamageStatus ds)
     {
         movementStatus = ms;

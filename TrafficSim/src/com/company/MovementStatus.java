@@ -41,5 +41,10 @@ public class MovementStatus
     {
         Double currentX = position.getPoint().X();
         Double currentY = position.getPoint().Y();
+
+        Double deltaX = xDir * speed;
+        Double deltaY = yDir * speed;
+
+        position = new Position(position.getTrafficElement(), currentX + deltaX, currentY + deltaY);
     }
 }

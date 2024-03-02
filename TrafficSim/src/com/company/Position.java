@@ -12,7 +12,7 @@ public class Position {
         return coordinate;
     }
 
-    public Position(TrafficElement element, int x, int y) {
+    public Position(TrafficElement element, Double x, Double y) {
         coordinate = new Point(x, y);
         trafficElement = element;
     }
