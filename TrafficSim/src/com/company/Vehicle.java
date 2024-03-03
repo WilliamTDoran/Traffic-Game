@@ -3,6 +3,7 @@ package com.company;
 public abstract class Vehicle
 {
     private MovementStatus movementStatus;
+    public MovementStatus MovementStatus() {return movementStatus;};
     private String color;
     private Double size;
     private Double weight;

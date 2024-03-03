@@ -11,6 +11,7 @@ public class TrafficNetwork {
 
     public static void main(String[] args) {
         TrafficNetwork tn = new TrafficNetwork();
+        //tn.checkNumberVehiclesInSegment(tn.roads.get(0), );
     }
 
     public TrafficNetwork() {
@@ -75,8 +76,14 @@ public class TrafficNetwork {
 
 
 
-    public int checkNumberVehiclesInSegment(RoadSegment roadSegment) {
-        return 0;
+    public int checkNumberVehiclesInSegment(RoadSegment roadSegment, ArrayList<Vehicle> vehicles) {
+        int numVehicles = 0;
+        for (int i = 0; i < vehicles.stream().count(); i++) {
+            if (roadSegment.equals(vehicles.get(i).MovementStatus().getPosition().getTrafficElement())) {
+                numVehicles++;
+            }
+        }
+        return numVehicles;
     }
 
     public int checkNumberVehiclesInLane(Lane lane) {
