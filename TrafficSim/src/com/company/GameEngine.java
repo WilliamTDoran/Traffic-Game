@@ -68,7 +68,16 @@ public class GameEngine implements MovementControl {
                         && otherCars.get(i).getMovementStatus().getPosition().getPoint().lessThan(newPosition.getPoint()));
             }
         } else {
-
+            ArrayList<Vehicle> otherCars = checkRegion(vehicle, vehicles);
+            for (int i = 0; i < otherCars.stream().count(); i++) {
+                if (vehicle == otherCars.get(i)) continue;
+                if (oldPos.getPoint().lessThan(otherCars.get(i).getMovementStatus().getPosition().getPoint())) return false;
+            }
+            otherCars = checkRegion(new Car(new MovementStatus(newPosition), "Imaginary", 0.0, vehicle.getWeight(), 0.0, new Reputation(), new DamageStatus(1.0), 1.0), vehicles);
+            for (int i = 0; i < otherCars.stream().count(); i++) {
+                if (oldPos.getPoint().lessThan(otherCars.get(i).getMovementStatus().getPosition().getPoint())) return false;
+            }
+            return true;
         }
         return false;
     }
