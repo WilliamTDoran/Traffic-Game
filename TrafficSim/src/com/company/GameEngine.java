@@ -18,7 +18,8 @@ public class GameEngine implements MovementControl {
     GameEngine() {
         trafficNetwork = new TrafficNetwork();
         vehicles = new ArrayList<Vehicle>();
-        vehicles.add(new Car(new MovementStatus(), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
+        vehicles.add(new Car(new MovementStatus(new Position(trafficNetwork.getRoads().get(0).getLanes().get(0), trafficNetwork.getRoads().get(0).getLanes().get(0).getMapPosition())), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
+        System.out.println(trafficNetwork.checkNumberVehiclesInSegment(trafficNetwork.getRoads().get(0), vehicles) + " vehicles in the first road");
     }
 
 

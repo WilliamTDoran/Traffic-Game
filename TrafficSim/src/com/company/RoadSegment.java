@@ -44,6 +44,8 @@ public class RoadSegment {
         System.out.println("New road created between " + from + ", & " + to + ", with " + lanes + " lanes");
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

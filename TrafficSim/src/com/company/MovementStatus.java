@@ -14,6 +14,10 @@ public class MovementStatus
     public void setSpeed(Double speed)              { this.speed = speed; }
     public void setDirection(Direction direction)   { this.direction = direction; }
 
+    public MovementStatus(Position p) {
+        position = p;
+    }
+
     public void updatePosition()
     {
         if (speed > 0)
