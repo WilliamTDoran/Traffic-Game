@@ -101,11 +101,17 @@ public class TrafficNetwork {
         return numVehicles;
     }
 
-    public int checkNumberVehiclesAtIntersection(Intersection intersection) {
-        return 0;
+    public int checkNumberVehiclesAtIntersection(Intersection intersection, ArrayList<Vehicle> vehicles) {
+        int numVehicles = 0;
+        for (int i = 0; i < vehicles.stream().count(); i++) {
+            if (intersection.equals(vehicles.get(i).MovementStatus().getPosition().getTrafficElement())) {
+                numVehicles++;
+            }
+        }
+        return numVehicles;
     }
 
-    public int checkNumberVehiclesInIntersection(Intersection intersection) {
-        return 0;
+    public int checkNumberVehiclesInIntersection(Intersection intersection, ArrayList<Vehicle> vehicles) {
+        return checkNumberVehiclesAtIntersection(intersection, vehicles);
     }
 }

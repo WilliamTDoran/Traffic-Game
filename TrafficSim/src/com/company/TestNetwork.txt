@@ -2,11 +2,11 @@
 [Bubbles] (5, 0)
 [idk] (5, 5)
 [theseAreNames] (0, 5)
-[CanBeWhatever] (-5, 0)
+[Bucky] (-5, 0)
 Interection1, Bubbles, 2
 Bubbles, idk, 1
 idk, theseAreNames, 2
 theseAreNames, Interection1, 2
 Interection1, theseAreNames, 2
-CanBeWhatever, Interection1, 3
-Interection1, CanBeWhatever, 3
+Bucky, Interection1, 3
+Interection1, Bucky, 3
