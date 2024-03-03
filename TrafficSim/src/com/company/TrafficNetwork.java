@@ -91,8 +91,14 @@ public class TrafficNetwork {
         return numVehicles;
     }
 
-    public int checkNumberVehiclesInLane(Lane lane) {
-        return 0;
+    public int checkNumberVehiclesInLane(Lane lane, ArrayList<Vehicle> vehicles) {
+        int numVehicles = 0;
+        for (int i = 0; i < vehicles.stream().count(); i++) {
+            if (lane.equals(vehicles.get(i).MovementStatus().getPosition().getTrafficElement())) {
+                numVehicles++;
+            }
+        }
+        return numVehicles;
     }
 
     public int checkNumberVehiclesAtIntersection(Intersection intersection) {

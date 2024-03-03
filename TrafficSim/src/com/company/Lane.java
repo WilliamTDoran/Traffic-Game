@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Objects;
+
 public class Lane extends TrafficElement{
     private double length;
     private Direction direction;
@@ -8,5 +10,10 @@ public class Lane extends TrafficElement{
         super(position);
         this.length = length;
         this.direction = direction;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return this == o;
     }
 }
