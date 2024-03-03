@@ -113,7 +113,11 @@ public class GameEngine implements MovementControl {
     }
 
     private void updateSimulationTurn() {
-
+        int numberOfTurns = 100;
+        for (turnCount = 0; turnCount < numberOfTurns; turnCount++) {
+            updateVehiclesPosition(trafficNetwork, vehicles);
+            updateSimulationTurn();
+        }
     }
 
     private void promptPlayer() {
