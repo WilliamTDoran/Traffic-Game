@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameEngine implements MovementControl {
     private TrafficNetwork trafficNetwork;
@@ -18,13 +19,21 @@ public class GameEngine implements MovementControl {
     GameEngine() {
         trafficNetwork = new TrafficNetwork();
         vehicles = new ArrayList<Vehicle>();
+        int numberOfCars = 5;
+        Random rand = new Random();
+        for (int i = 0; i < numberOfCars; i++) {
+            int road = rand.nextInt((int)trafficNetwork.getRoads().stream().count());
+            Lane lane = trafficNetwork.getRoads().get(road).getLanes().get(rand.nextInt((int)trafficNetwork.getRoads().get(road).getLanes().stream().count()));
+            vehicles.add(new Car(new MovementStatus(new Position(lane, lane.getMapPosition())), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
+        }
+        /*vehicles.add(new Car(new MovementStatus(new Position(trafficNetwork.getRoads().get(0).getLanes().get(0), trafficNetwork.getRoads().get(0).getLanes().get(0).getMapPosition())), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
         vehicles.add(new Car(new MovementStatus(new Position(trafficNetwork.getRoads().get(0).getLanes().get(0), trafficNetwork.getRoads().get(0).getLanes().get(0).getMapPosition())), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
         vehicles.add(new Car(new MovementStatus(new Position(trafficNetwork.getRoads().get(0).getLanes().get(1), trafficNetwork.getRoads().get(0).getLanes().get(1).getMapPosition())), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
         vehicles.add(new Car(new MovementStatus(new Position(trafficNetwork.getRoads().get(1).getLanes().get(0), trafficNetwork.getRoads().get(1).getLanes().get(0).getMapPosition())), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
         vehicles.add(new Car(new MovementStatus(new Position(trafficNetwork.getIntersections().get(0), trafficNetwork.getIntersections().get(0).getMapPosition())), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
         System.out.println(trafficNetwork.checkNumberVehiclesInSegment(trafficNetwork.getRoads().get(0), vehicles) + " vehicles in the first road");
         System.out.println(trafficNetwork.checkNumberVehiclesInLane(trafficNetwork.getRoads().get(0).getLanes().get(0), vehicles) + " vehicles in the first lane");
-        System.out.println(trafficNetwork.checkNumberVehiclesInIntersection(trafficNetwork.getIntersections().get(0), vehicles) + " vehicles in the first intersection");
+        System.out.println(trafficNetwork.checkNumberVehiclesInIntersection(trafficNetwork.getIntersections().get(0), vehicles) + " vehicles in the first intersection");*/
     }
 
 
