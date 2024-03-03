@@ -8,6 +8,11 @@ public abstract class Vehicle
     private Double size;
     private Double weight;
     private Double maxSpeed;
+
+    public Double getMaxSpeed() {
+        return maxSpeed;
+    }
+
     private Reputation reputation;
     private DamageStatus damageStatus;
 

@@ -1,8 +1,8 @@
 package com.company;
 
 public class Point {
-    private final double x;
-    private final double y;
+    private double x;
+    private double y;
 
     public double X() { return x; }
 
@@ -11,5 +11,9 @@ public class Point {
     public Point(double X, double Y) {
         x = X;
         y = Y;
+    }
+
+    public boolean lessThan(Point p) {
+        return (x - p.X() <= 0) && y - p.Y() <= 0;
     }
 }

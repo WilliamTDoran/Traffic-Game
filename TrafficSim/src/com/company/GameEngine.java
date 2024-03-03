@@ -38,15 +38,39 @@ public class GameEngine implements MovementControl {
 
 
     public ArrayList<Vehicle> updateVehiclesPosition(TrafficNetwork network, ArrayList<Vehicle> vehicles) {
-        return null;
+        for (int i = 0; i < vehicles.stream().count(); i++) {
+            Position newPos = new MovementStatus(vehicles.get(i)).getPosition();
+            vehicles.get(i).move(validateMoveChoice(vehicles.get(i), newPos));
+        }
+        return vehicles;
     }
 
     public ArrayList<Vehicle> checkRegion(Vehicle vehicle, ArrayList<Vehicle> vehicles) {
-        return null;
+        ArrayList<Vehicle> vehiclesInSameRegion = new ArrayList<Vehicle>();
+        for (int i = 0; i < vehicles.stream().count(); i++) {
+            if (vehicle.getMovementStatus().getPosition().getTrafficElement() == vehicles.get(i).getMovementStatus().getPosition().getTrafficElement()) {
+                vehiclesInSameRegion.add(vehicles.get(i));
+            }
+        }
+        return vehiclesInSameRegion;
     }
 
-    public Position validateMoveChoice(Vehicle vehicle, Position newPosition) {
-        return newPosition;
+    public boolean validateMoveChoice(Vehicle vehicle, Position newPosition)
+    {
+        Position oldPos = vehicle.getMovementStatus().getPosition();
+        TrafficElement element = oldPos.getTrafficElement();
+        TrafficElement newElement = newPosition.getTrafficElement();
+        if (element.equals(newElement)) {
+            ArrayList<Vehicle> otherCars = checkRegion(vehicle, vehicles);
+            for (int i = 0; i < otherCars.stream().count(); i++) {
+                if (vehicle == vehicles.get(i)) continue;
+                return !(oldPos.getPoint().lessThan(otherCars.get(i).getMovementStatus().getPosition().getPoint())
+                        && otherCars.get(i).getMovementStatus().getPosition().getPoint().lessThan(newPosition.getPoint()));
+            }
+        } else {
+
+        }
+        return false;
     }
 
     public ArrayList<TrafficElement> probeMapSurroundings(Vehicle vehicle) {

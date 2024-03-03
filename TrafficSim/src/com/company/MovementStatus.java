@@ -18,6 +18,14 @@ public class MovementStatus
         position = p;
     }
 
+    public MovementStatus(Vehicle v)
+    {
+        position = v.getMovementStatus().getPosition();
+        speed = v.getMaxSpeed();
+        direction = v.getMovementStatus().getDirection();
+        updatePosition();
+    }
+
     public void updatePosition()
     {
         if (speed > 0)

@@ -7,7 +7,7 @@ public interface MovementControl {
 
     public ArrayList<Vehicle> checkRegion(Vehicle vehicle, ArrayList<Vehicle> vehicles);
 
-    public Position validateMoveChoice(Vehicle vehicle, Position newPosition);
+    public boolean validateMoveChoice(Vehicle vehicle, Position newPosition);
 
     public ArrayList<TrafficElement> probeMapSurroundings(Vehicle vehicle);
 }
