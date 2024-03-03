@@ -1,8 +1,8 @@
 package com.company;
 
 public class Point {
-    double x;
-    double y;
+    private final double x;
+    private final double y;
 
     public double X() { return x; }
 

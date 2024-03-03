@@ -6,8 +6,8 @@ import java.util.Objects;
 import static java.lang.Math.abs;
 
 public class RoadSegment {
-    ArrayList<Intersection> intersections;
-    ArrayList<Lane> lanes;
+    private ArrayList<Intersection> intersections;
+    private ArrayList<Lane> lanes;
 
     public RoadSegment(Intersection from, Intersection to, int lanes) {
         intersections = new ArrayList<>();
@@ -16,13 +16,13 @@ public class RoadSegment {
         intersections.add(from);
         intersections.add(to);
 
-        double length = from.mapPosition.x - to.mapPosition.x + from.mapPosition.y - to.mapPosition.y;
+        double length = from.getMapPosition().X() - to.getMapPosition().X() + from.getMapPosition().Y() - to.getMapPosition().Y();
         Direction direction;
-        if (length <= 0 && from.mapPosition.x == to.mapPosition.x) {
+        if (length <= 0 && from.getMapPosition().X() == to.getMapPosition().X()) {
             direction = Direction.South;
-        } else if (length <= 0 && from.mapPosition.y == to.mapPosition.y) {
+        } else if (length <= 0 && from.getMapPosition().Y() == to.getMapPosition().Y()) {
             direction = Direction.West;
-        } else if (length >= 0 && from.mapPosition.y == to.mapPosition.y) {
+        } else if (length >= 0 && from.getMapPosition().Y() == to.getMapPosition().Y()) {
             direction = Direction.East;
         } else {//if (length >= 0 && from.mapPosition.x == to.mapPosition.x) {
             direction = Direction.North;
@@ -30,7 +30,7 @@ public class RoadSegment {
         length = abs(length);
 
         for (int i = 0; i < lanes; i++) {
-            this.lanes.add(new Lane(from.mapPosition, length, direction));
+            this.lanes.add(new Lane(from.getMapPosition(), length, direction));
         }
         System.out.println("New road created between " + from + ", & " + to + ", with " + lanes + " lanes");
     }

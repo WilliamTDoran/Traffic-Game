@@ -1,8 +1,8 @@
 package com.company;
 
 public class Position {
-    TrafficElement trafficElement;
-    Point coordinate;
+    private TrafficElement trafficElement;
+    private Point coordinate;
 
     public TrafficElement getTrafficElement() {
         return trafficElement;

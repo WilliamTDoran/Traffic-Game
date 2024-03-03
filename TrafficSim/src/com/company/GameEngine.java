@@ -3,12 +3,12 @@ package com.company;
 import java.util.ArrayList;
 
 public class GameEngine implements MovementControl {
-    TrafficNetwork trafficNetwork;
-    ArrayList<Vehicle> vehicles;
-    Player player;
-    MovementControl movementControl;
-    ChallengeHandle challengeHandle;
-    int turnCount;
+    private TrafficNetwork trafficNetwork;
+    private ArrayList<Vehicle> vehicles;
+    private Player player;
+    private MovementControl movementControl;
+    private ChallengeHandle challengeHandle;
+    private int turnCount;
 
     public static void main(String[] args) {
         GameEngine GE = new GameEngine();

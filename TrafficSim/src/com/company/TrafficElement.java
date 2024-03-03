@@ -3,7 +3,7 @@ package com.company;
 import java.util.Objects;
 
 public abstract class TrafficElement {
-    Point mapPosition;
+    private final Point mapPosition;
 
     public Point getMapPosition() {
         return mapPosition;
@@ -15,7 +15,7 @@ public abstract class TrafficElement {
 
     @Override
     public String toString() {
-        return "("+mapPosition.x+","+mapPosition.y+")";
+        return "("+mapPosition.X()+","+mapPosition.Y()+")";
     }
 
     @Override

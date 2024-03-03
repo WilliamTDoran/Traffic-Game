@@ -1,8 +1,8 @@
 package com.company;
 
 public class Lane extends TrafficElement{
-    double length;
-    Direction direction;
+    private double length;
+    private Direction direction;
 
     protected Lane(Point position, double length, Direction direction) {
         super(position);

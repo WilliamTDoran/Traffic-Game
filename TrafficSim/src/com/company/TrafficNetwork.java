@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TrafficNetwork {
-    ArrayList<RoadSegment> roads;
-    ArrayList<Intersection> intersections;
+    private ArrayList<RoadSegment> roads;
+    public ArrayList<RoadSegment> getRoads() {return roads;}
+    private ArrayList<Intersection> intersections;
 
     public static void main(String[] args) {
         TrafficNetwork tn = new TrafficNetwork();
@@ -57,7 +58,7 @@ public class TrafficNetwork {
                                 if (end != -1) break;
                             }
                         }
-                        if (intersections.get(start).mapPosition.x == intersections.get(end).mapPosition.x || intersections.get(start).mapPosition.y == intersections.get(end).mapPosition.y) {
+                        if (intersections.get(start).getMapPosition().X() == intersections.get(end).getMapPosition().X() || intersections.get(start).getMapPosition().Y() == intersections.get(end).getMapPosition().Y()) {
                             roads.add(new RoadSegment(intersections.get(start), intersections.get(end), numLanes));
                         }
                     } catch (NumberFormatException e) {
