@@ -6,8 +6,17 @@ import java.util.Objects;
 import static java.lang.Math.abs;
 
 public class RoadSegment {
-    private ArrayList<Intersection> intersections;
-    private ArrayList<Lane> lanes;
+    private final ArrayList<Intersection> intersections;
+
+    public ArrayList<Intersection> getIntersections() {
+        return intersections;
+    }
+
+    private final ArrayList<Lane> lanes;
+
+    public ArrayList<Lane> getLanes() {
+        return lanes;
+    }
 
     public RoadSegment(Intersection from, Intersection to, int lanes) {
         intersections = new ArrayList<>();

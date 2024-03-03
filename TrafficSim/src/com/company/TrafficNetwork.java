@@ -10,6 +10,10 @@ public class TrafficNetwork {
     public ArrayList<RoadSegment> getRoads() {return roads;}
     private ArrayList<Intersection> intersections;
 
+    public ArrayList<Intersection> getIntersections() {
+        return intersections;
+    }
+
     public static void main(String[] args) {
         TrafficNetwork tn = new TrafficNetwork();
         //tn.checkNumberVehiclesInSegment(tn.roads.get(0), );
