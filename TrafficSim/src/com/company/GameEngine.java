@@ -83,7 +83,33 @@ public class GameEngine implements MovementControl {
     }
 
     public ArrayList<TrafficElement> probeMapSurroundings(Vehicle vehicle) {
-        return null;
+        TrafficElement element = vehicle.getMovementStatus().getPosition().getTrafficElement();
+        ArrayList<TrafficElement> near = new ArrayList<>();
+        boolean found = false;
+        if (element.getClass() == Lane.class) {
+            for (int i = 0; i < trafficNetwork.getRoads().stream().count(); i++) {
+                for (int j = 0; j < trafficNetwork.getRoads().get(i).getLanes().stream().count(); j++) {
+                    if (((Lane)element).equals(trafficNetwork.getRoads().get(i).getLanes().get(j))) {
+                        for (int k = 0; k < trafficNetwork.getRoads().get(i).getLanes().stream().count(); k++) {
+                            near.add(trafficNetwork.getRoads().get(i).getLanes().get(k));
+                        }
+                        for (int k = 0; k < trafficNetwork.getRoads().get(i).getIntersections().stream().count(); k++) {
+                            near.add(trafficNetwork.getRoads().get(i).getIntersections().get(k));
+                        }
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) break;
+            }
+        } else { // if it's an intersection
+            for (int i = 0; i < ((Intersection)element).getRoads().stream().count(); i++) {
+                for (int j = 0; j < ((Intersection)element).getRoads().get(i).getLanes().stream().count(); j++) {
+                    near.add(((Intersection)element).getRoads().get(i).getLanes().get(j));
+                }
+            }
+        }
+        return near;
     }
 
     private void updateSimulationTurn() {
