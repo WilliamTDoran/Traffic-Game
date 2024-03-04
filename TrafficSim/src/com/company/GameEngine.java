@@ -11,11 +11,6 @@ public class GameEngine implements MovementControl {
     private ChallengeHandle challengeHandle;
     private int turnCount;
 
-    public static void main(String[] args) {
-        GameEngine GE = new GameEngine();
-        //tn.checkNumberVehiclesInSegment(tn.roads.get(0), );
-    }
-
     GameEngine() {
         trafficNetwork = new TrafficNetwork();
         vehicles = new ArrayList<Vehicle>();
@@ -115,12 +110,13 @@ public class GameEngine implements MovementControl {
     private void updateSimulationTurn() {
         int numberOfTurns = 100;
         for (turnCount = 0; turnCount < numberOfTurns; turnCount++) {
+            promptPlayer();
             updateVehiclesPosition(trafficNetwork, vehicles);
             updateSimulationTurn();
         }
     }
 
     private void promptPlayer() {
-
+        ArrayList<TrafficElement> surroundings = probeMapSurroundings(player.getVehicle());
     }
 }

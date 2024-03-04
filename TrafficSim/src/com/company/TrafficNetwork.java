@@ -14,11 +14,6 @@ public class TrafficNetwork {
         return intersections;
     }
 
-    public static void main(String[] args) {
-        TrafficNetwork tn = new TrafficNetwork();
-        //tn.checkNumberVehiclesInSegment(tn.roads.get(0), );
-    }
-
     public TrafficNetwork() {
         String filename = "src/com/company/TestNetwork.txt";
         try {
