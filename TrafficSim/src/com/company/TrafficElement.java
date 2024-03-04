@@ -4,10 +4,10 @@ import java.util.Objects;
 
 public abstract class TrafficElement {
     private final Point mapPosition;
+    protected String type;
 
-    public Point getMapPosition() {
-        return mapPosition;
-    }
+    public String getType() { return  type; }
+    public Point getMapPosition() { return mapPosition; }
 
     public TrafficElement(Point position) {
         mapPosition = position;

@@ -8,5 +8,6 @@ final public class Car extends Vehicle
     {
         super(ms, color, size, weight, maxSpeed, rep, ds);
         numberDoors = nd;
+        type = "Car";
     }
 }

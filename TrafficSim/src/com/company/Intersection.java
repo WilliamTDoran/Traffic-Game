@@ -9,8 +9,10 @@ public class Intersection extends TrafficElement {
         return roads;
     }
 
-    protected Intersection(Point pos) {
+    protected Intersection(Point pos)
+    {
         super(pos);
+        type = "Intersection";
     }
 
     @Override

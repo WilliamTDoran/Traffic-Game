@@ -12,6 +12,7 @@ public class Lane extends TrafficElement{
         super(position);
         this.length = length;
         this.direction = direction;
+        type = "Lane";
     }
 
     @Override

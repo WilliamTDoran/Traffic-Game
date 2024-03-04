@@ -61,4 +61,9 @@ public class MovementStatus
 
         position = new Position(position.getTrafficElement(), currentX + deltaX, currentY + deltaY);
     }
+
+    @Override
+    public String toString() {
+        return "("+position.getPoint().X()+", "+position.getPoint().Y()+")";
+    }
 }

@@ -8,5 +8,6 @@ final public class Truck extends Vehicle
     {
         super(ms, color, size, weight, maxSpeed, rep, ds);
         this.cargo = cargo;
+        type = "Truck";
     }
 }

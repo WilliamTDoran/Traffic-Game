@@ -8,5 +8,6 @@ final public class Bus extends Vehicle
     {
         super(ms, color, size, weight, maxSpeed, rep, ds);
         numberPassengers = np;
+        type = "Bus";
     }
 }

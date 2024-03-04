@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class GameEngine implements MovementControl {
     private TrafficNetwork trafficNetwork;
@@ -10,6 +11,8 @@ public class GameEngine implements MovementControl {
     private MovementControl movementControl;
     private ChallengeHandle challengeHandle;
     private int turnCount;
+
+    private Scanner scanner = new Scanner(System.in);
 
     GameEngine() {
         trafficNetwork = new TrafficNetwork();
@@ -128,17 +131,27 @@ public class GameEngine implements MovementControl {
     }
 
     private void promptPlayer() {
-        Point playerPosition = player.getVehicle().getMovementStatus().getPosition().getPoint();
         Double playerSpeed = player.getVehicle().getMovementStatus().getSpeed();
         Direction playerDirection = player.getVehicle().getMovementStatus().getDirection();
 
-        System.out.println("You are at position " + playerPosition.X() + ", " + playerPosition.Y() + ". You are moving " + playerDirection + " at " + playerSpeed + " kph.");
+        System.out.println("You are at position " + player.getVehicle().getMovementStatus().toString() + ". You are moving " + playerDirection + " at " + playerSpeed + " kph.");
 
+        System.out.println("There is: ");
         ArrayList<TrafficElement> surroundings = probeMapSurroundings(player.getVehicle());
         for (int i = 0; i < surroundings.stream().count(); i++)
         {
-            System.out.println(surroundings.get(i).getMapPosition());
-            System.out.println(surroundings.size());
+            System.out.println("     A(n) " + surroundings.get(i).getType() + " at " + surroundings.get(i).toString());
         }
+
+        System.out.println("The other vehicles on your lane are: ");
+        ArrayList<Vehicle> competition = checkRegion(player.getVehicle(), vehicles);
+        for (int i = 0; i < competition.stream().count(); i++)
+        {
+            System.out.println("     A " + competition.get(i).getType() + " at " + competition.get(i).getMovementStatus().toString() + ", moving " + competition.get(i).getMovementStatus().getDirection() + "ward at " + competition.get(i).getMovementStatus().getSpeed() + " kph.");
+        }
+
+        System.out.println();
+
+        String input = scanner.nextLine();
     }
 }
