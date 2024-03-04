@@ -14,13 +14,24 @@ public class GameEngine implements MovementControl {
     GameEngine() {
         trafficNetwork = new TrafficNetwork();
         vehicles = new ArrayList<Vehicle>();
-        int numberOfCars = 5;
+        int numberOfCars = 5; //does not include the player
         Random rand = new Random();
-        for (int i = 0; i < numberOfCars; i++) {
+        for (int i = 0; i < numberOfCars + 1; i++) {
             int road = rand.nextInt((int)trafficNetwork.getRoads().stream().count());
             Lane lane = trafficNetwork.getRoads().get(road).getLanes().get(rand.nextInt((int)trafficNetwork.getRoads().get(road).getLanes().stream().count()));
-            vehicles.add(new Car(new MovementStatus(new Position(lane, lane.getMapPosition())), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
+            vehicles.add(new Car(new MovementStatus(new Position(lane, lane.getMapPosition()), 0.0, lane.getDirection()), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
+
+            if (i == numberOfCars)
+            {
+                player = new Player(vehicles.get(i));
+            }
         }
+
+        while (true)
+        {
+            updateSimulationTurn();
+        }
+
         /*vehicles.add(new Car(new MovementStatus(new Position(trafficNetwork.getRoads().get(0).getLanes().get(0), trafficNetwork.getRoads().get(0).getLanes().get(0).getMapPosition())), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
         vehicles.add(new Car(new MovementStatus(new Position(trafficNetwork.getRoads().get(0).getLanes().get(0), trafficNetwork.getRoads().get(0).getLanes().get(0).getMapPosition())), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
         vehicles.add(new Car(new MovementStatus(new Position(trafficNetwork.getRoads().get(0).getLanes().get(1), trafficNetwork.getRoads().get(0).getLanes().get(1).getMapPosition())), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
@@ -68,7 +79,7 @@ public class GameEngine implements MovementControl {
                 if (vehicle == otherCars.get(i)) continue;
                 if (oldPos.getPoint().lessThan(otherCars.get(i).getMovementStatus().getPosition().getPoint())) return false;
             }
-            otherCars = checkRegion(new Car(new MovementStatus(newPosition), "Imaginary", 0.0, vehicle.getWeight(), 0.0, new Reputation(), new DamageStatus(1.0), 1.0), vehicles);
+            otherCars = checkRegion(new Car(new MovementStatus(newPosition, 0.0, vehicle.getMovementStatus().getDirection()), "Imaginary", 0.0, vehicle.getWeight(), 0.0, new Reputation(), new DamageStatus(1.0), 1.0), vehicles);
             for (int i = 0; i < otherCars.stream().count(); i++) {
                 if (oldPos.getPoint().lessThan(otherCars.get(i).getMovementStatus().getPosition().getPoint())) return false;
             }
@@ -117,6 +128,17 @@ public class GameEngine implements MovementControl {
     }
 
     private void promptPlayer() {
+        Point playerPosition = player.getVehicle().getMovementStatus().getPosition().getPoint();
+        Double playerSpeed = player.getVehicle().getMovementStatus().getSpeed();
+        Direction playerDirection = player.getVehicle().getMovementStatus().getDirection();
+
+        System.out.println("You are at position " + playerPosition.X() + ", " + playerPosition.Y() + ". You are moving " + playerDirection + " at " + playerSpeed + " kph.");
+
         ArrayList<TrafficElement> surroundings = probeMapSurroundings(player.getVehicle());
+        for (int i = 0; i < surroundings.stream().count(); i++)
+        {
+            System.out.println(surroundings.get(i).getMapPosition());
+            System.out.println(surroundings.size());
+        }
     }
 }
