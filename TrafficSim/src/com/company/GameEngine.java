@@ -26,7 +26,7 @@ public class GameEngine implements MovementControl {
 
             if (i == numberOfCars)
             {
-                player = new Player(vehicles.get(i));
+                player = new Player(new Car(new MovementStatus(new Position(lane, lane.getMapPosition()), 0.0, lane.getDirection()), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
             }
         }
 
@@ -55,7 +55,7 @@ public class GameEngine implements MovementControl {
     }
 
     public ArrayList<Vehicle> checkRegion(Vehicle vehicle, ArrayList<Vehicle> vehicles) {
-        ArrayList<Vehicle> vehiclesInSameRegion = new ArrayList<Vehicle>();
+        ArrayList<Vehicle> vehiclesInSameRegion = new ArrayList<>();
         for (int i = 0; i < vehicles.stream().count(); i++) {
             if (vehicle.getMovementStatus().getPosition().getTrafficElement() == vehicles.get(i).getMovementStatus().getPosition().getTrafficElement()) {
                 vehiclesInSameRegion.add(vehicles.get(i));
@@ -150,8 +150,23 @@ public class GameEngine implements MovementControl {
             System.out.println("     A " + competition.get(i).getType() + " at " + competition.get(i).getMovementStatus().toString() + ", moving " + competition.get(i).getMovementStatus().getDirection() + "ward at " + competition.get(i).getMovementStatus().getSpeed() + " kph.");
         }
 
-        System.out.println();
+        System.out.println("Type D for drive, B for brake, or L or R for turning left or right (if applicable)");
 
         String input = scanner.nextLine();
+
+        switch(input)
+        {
+            case("D"):
+                Position newPos = new MovementStatus(player.getVehicle()).getPosition();
+                player.getVehicle().move(validateMoveChoice(player.getVehicle(), newPos));
+                break;
+            case("B"):
+                player.getVehicle().move(false);
+                break;
+            case("L"):
+                break;
+            case("R"):
+                break;
+        }
     }
 }
