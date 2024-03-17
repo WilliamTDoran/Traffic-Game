@@ -133,6 +133,7 @@ public class GameEngine implements MovementControl {
     private void promptPlayer() {
         Double playerSpeed = player.getVehicle().getMovementStatus().getSpeed();
         Direction playerDirection = player.getVehicle().getMovementStatus().getDirection();
+        boolean atIntersection = false;
 
         System.out.println("You are at position " + player.getVehicle().getMovementStatus().toString() + ". You are moving " + playerDirection + " at " + playerSpeed + " kph.");
 
