@@ -13,10 +13,10 @@ public abstract class TrafficElement {
         mapPosition = position;
     }
 
-    public boolean pointCompare(TrafficElement other)
+    public boolean pointCompare(Point other)
     {
-        double xDiff = Math.abs(mapPosition.X() - other.getMapPosition().X());
-        double yDiff = Math.abs(mapPosition.Y() - other.getMapPosition().Y());
+        double xDiff = Math.abs(mapPosition.X() - other.X());
+        double yDiff = Math.abs(mapPosition.Y() - other.Y());
 
         return (xDiff < 0.5 && yDiff < 0.5);
     }

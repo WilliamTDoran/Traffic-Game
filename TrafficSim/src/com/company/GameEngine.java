@@ -141,6 +141,8 @@ public class GameEngine implements MovementControl {
         ArrayList<TrafficElement> surroundings = probeMapSurroundings(player.getVehicle());
         for (int i = 0; i < surroundings.stream().count(); i++)
         {
+            if (surroundings.get(i).getType().equals("Intersection") && surroundings.get(i).pointCompare(player.getVehicle().getMovementStatus().getPosition().getPoint()))
+                atIntersection = true;
             System.out.println("     A(n) " + surroundings.get(i).getType() + " at " + surroundings.get(i).toString());
         }
 
