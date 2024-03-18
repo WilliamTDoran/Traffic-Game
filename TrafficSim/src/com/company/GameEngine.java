@@ -133,7 +133,7 @@ public class GameEngine implements MovementControl {
     private void promptPlayer() {
         Double playerSpeed = player.getVehicle().getMovementStatus().getSpeed();
         Direction playerDirection = player.getVehicle().getMovementStatus().getDirection();
-        boolean atIntersection = false;
+        ArrayList<RoadSegment> turnOptions;
 
         System.out.println("You are at position " + player.getVehicle().getMovementStatus().toString() + ". You are moving " + playerDirection + " at " + playerSpeed + " kph.");
 
@@ -142,7 +142,19 @@ public class GameEngine implements MovementControl {
         for (int i = 0; i < surroundings.stream().count(); i++)
         {
             if (surroundings.get(i).getType().equals("Intersection") && surroundings.get(i).pointCompare(player.getVehicle().getMovementStatus().getPosition().getPoint()))
-                atIntersection = true;
+            {
+                Intersection sec = (Intersection)(surroundings.get(i)); //this is so dirty but technically i am checking that it's an intersection in the previous line
+                ArrayList<RoadSegment> turnOffs = sec.getRoads();
+
+                for (int j = 0; j < turnOffs.stream().count(); j++)
+                {
+                    TrafficElement playerTE = player.getVehicle().getMovementStatus().getPosition().getTrafficElement();
+                    if (playerTE instanceof Lane)
+                    {
+                        
+                    }
+                }
+            }
             System.out.println("     A(n) " + surroundings.get(i).getType() + " at " + surroundings.get(i).toString());
         }
 
