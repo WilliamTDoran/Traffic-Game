@@ -143,23 +143,7 @@ public class GameEngine implements MovementControl {
         {
             if (surroundings.get(i).getType().equals("Intersection") && surroundings.get(i).pointCompare(player.getVehicle().getMovementStatus().getPosition().getPoint()))
             {
-                Intersection sec = (Intersection)(surroundings.get(i)); //this is so dirty but technically i am checking that it's an intersection in the previous line
-                ArrayList<RoadSegment> turnOffs = sec.getRoads();
-
-                for (int j = 0; j < turnOffs.stream().count(); j++)
-                {
-                    TrafficElement playerTE = player.getVehicle().getMovementStatus().getPosition().getTrafficElement();
-                    if (playerTE instanceof Lane)
-                    {
-                        for (int k = 0; k < turnOffs.get(i).getLanes().stream().count(); k++)
-                        {
-                            if (turnOffs.get(i).getLanes().get(k) != playerTE)
-                            {
-                                turnOptions.add(turnOffs.get(i).getLanes().get(k));
-                            }
-                        }
-                    }
-                }
+                
             }
             System.out.println("     A(n) " + surroundings.get(i).getType() + " at " + surroundings.get(i).toString());
         }
