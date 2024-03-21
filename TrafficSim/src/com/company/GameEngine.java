@@ -12,11 +12,16 @@ public class GameEngine implements MovementControl {
     private ChallengeHandle challengeHandle;
     private int turnCount;
 
+    public static GameEngine instance;
+
     private Scanner scanner = new Scanner(System.in);
 
     GameEngine() {
         trafficNetwork = new TrafficNetwork();
         vehicles = new ArrayList<Vehicle>();
+        if (instance == null) {
+            instance = this;
+        }
         int numberOfCars = 5; //does not include the player
         Random rand = new Random();
         for (int i = 0; i < numberOfCars + 1; i++) {
@@ -43,6 +48,11 @@ public class GameEngine implements MovementControl {
         System.out.println(trafficNetwork.checkNumberVehiclesInSegment(trafficNetwork.getRoads().get(0), vehicles) + " vehicles in the first road");
         System.out.println(trafficNetwork.checkNumberVehiclesInLane(trafficNetwork.getRoads().get(0).getLanes().get(0), vehicles) + " vehicles in the first lane");
         System.out.println(trafficNetwork.checkNumberVehiclesInIntersection(trafficNetwork.getIntersections().get(0), vehicles) + " vehicles in the first intersection");*/
+    }
+
+
+    public ArrayList<Vehicle> getListVehicles() {
+        return vehicles;
     }
 
 
