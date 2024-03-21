@@ -21,6 +21,7 @@ public abstract class TrafficElement {
         return (xDiff < 0.5 && yDiff < 0.5);
     }
 
+
     @Override
     public String toString() {
         return "("+mapPosition.X()+","+mapPosition.Y()+")";

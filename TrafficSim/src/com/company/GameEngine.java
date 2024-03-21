@@ -79,6 +79,11 @@ public class GameEngine implements MovementControl {
         Position oldPos = vehicle.getMovementStatus().getPosition();
         TrafficElement element = oldPos.getTrafficElement();
         TrafficElement newElement = newPosition.getTrafficElement();
+
+        if (element.getType() == "Lane") {
+            Lane lane = (Lane) element;
+            
+        }
         if (element.equals(newElement)) {
             ArrayList<Vehicle> otherCars = checkRegion(vehicle, vehicles);
             for (int i = 0; i < otherCars.stream().count(); i++) {
