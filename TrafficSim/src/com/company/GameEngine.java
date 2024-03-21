@@ -166,9 +166,22 @@ public class GameEngine implements MovementControl {
                 player.getVehicle().move(false);
                 break;
             case("L"):
+                if (atIntersection)
+                {
+                    Turn();
+                }
                 break;
             case("R"):
+                if (atIntersection)
+                {
+                    Turn();
+                }
                 break;
         }
+    }
+
+    private void Turn()
+    {
+
     }
 }
