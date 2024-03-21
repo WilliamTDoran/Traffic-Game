@@ -133,7 +133,7 @@ public class GameEngine implements MovementControl {
     private void promptPlayer() {
         Double playerSpeed = player.getVehicle().getMovementStatus().getSpeed();
         Direction playerDirection = player.getVehicle().getMovementStatus().getDirection();
-        ArrayList<RoadSegment> turnOptions;
+        ArrayList<Lane> turnOptions = new ArrayList<Lane>();
 
         System.out.println("You are at position " + player.getVehicle().getMovementStatus().toString() + ". You are moving " + playerDirection + " at " + playerSpeed + " kph.");
 
@@ -151,7 +151,13 @@ public class GameEngine implements MovementControl {
                     TrafficElement playerTE = player.getVehicle().getMovementStatus().getPosition().getTrafficElement();
                     if (playerTE instanceof Lane)
                     {
-                        
+                        for (int k = 0; k < turnOffs.get(i).getLanes().stream().count(); k++)
+                        {
+                            if (turnOffs.get(i).getLanes().get(k) != playerTE)
+                            {
+                                turnOptions.add(turnOffs.get(i).getLanes().get(k));
+                            }
+                        }
                     }
                 }
             }
