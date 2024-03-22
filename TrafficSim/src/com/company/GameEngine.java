@@ -224,23 +224,33 @@ public class GameEngine implements MovementControl {
 
     private void TurnCars()
     {
+        //For every intersection
         for (int i=0; i<trafficNetwork.getIntersections().size(); i++) {
             Intersection intersection = trafficNetwork.getIntersections().get(i);
+            //If there's more than 1 car, start a challenge
             if (trafficNetwork.checkNumberVehiclesAtIntersection(intersection, vehicles) > 1) {
-
+            //Else if there's exactly one car
             } else if (trafficNetwork.checkNumberVehiclesAtIntersection(intersection, vehicles) == 1) {
                 boolean doneCar = false;
+                //For each road in the intersection
                 for (int j = 0; j < intersection.getRoads().size(); j++) {
+                    //Get a list of every vehicle in the lanes on that road 
                     ArrayList<Vehicle> vehiclesinLane = new ArrayList<Vehicle>();
                     for (int k = 0; k < vehicles.size(); k++) {
+                        //Specifically, every vehicle in the lane at this end of the lane 
                         if (intersection.getRoads().get(j).equals(vehicles.get(i).MovementStatus().getPosition().getTrafficElement()) && vehicles.get(k).getMovementStatus().getPosition().equals(intersection.getMapPosition())) {
                             vehiclesinLane.add(vehicles.get(k));
                         }
                     }
+                    //If there is space in the lane
                     if (vehiclesinLane.size() < intersection.getRoads().get(j).getLanes().size()) {
+                        //for each lane
                         for (int k = 0; k < intersection.getRoads().get(j).getLanes().size(); k++) {
+                            //for each vehicle in the lanes in this road
                             for (int l = 0; l < vehiclesinLane.size(); l++) {
+                                //if that vehicle is NOT in this lane
                                 if (!vehiclesinLane.get(l).MovementStatus().getPosition().getTrafficElement().equals(intersection.getRoads().get(j).getLanes().get(k))) {
+                                    //Move it there.
                                     vehiclesinLane.get(l).MovementStatus().setPosition(new Position(intersection.getRoads().get(j).getLanes().get(k), intersection.getRoads().get(j).getLanes().get(k).getMapPosition()));
                                     doneCar = true;
                                     break;
@@ -248,6 +258,7 @@ public class GameEngine implements MovementControl {
                             }
                             if (doneCar) break;
                         }
+                    //if there isn't space in the lanes
                     } else if (j == intersection.getRoads().size()-1) {
                         //damage the lone car & damage it's reputation
                     }
