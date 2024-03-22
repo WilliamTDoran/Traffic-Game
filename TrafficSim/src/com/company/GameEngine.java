@@ -33,7 +33,7 @@ public class GameEngine implements MovementControl {
 
             if (i == numberOfCars)
             {
-                player = new Player(new Car(new MovementStatus(new Position(lane, lane.getMapPosition()), 0.0, lane.getDirection()), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2));
+                player = new Player(vehicleFactory.CreateCar(new MovementStatus(new Position(lane, lane.getMapPosition()), 0.0, lane.getDirection())));
             }
         }
 
