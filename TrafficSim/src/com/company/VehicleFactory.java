@@ -20,7 +20,8 @@ public class VehicleFactory
 
         if (select <= 6) //car
         {
-            //result = new Car(stat,
+            int numDoors = (rand.nextInt(1) + 1) * 2; //2 or 4
+            result = new Car(stat, color, 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), numDoors);
         }
         else if (select == 9) //bus
         {

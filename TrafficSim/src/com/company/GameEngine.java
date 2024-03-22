@@ -27,11 +27,11 @@ public class GameEngine implements MovementControl {
         for (int i = 0; i < numberOfCars + 1; i++) {
             int road = rand.nextInt((int)trafficNetwork.getRoads().stream().count());
             Lane lane = trafficNetwork.getRoads().get(road).getLanes().get(rand.nextInt((int)trafficNetwork.getRoads().get(road).getLanes().stream().count()));
-            vehicles.add(new Car(new MovementStatus(new Position(lane, lane.getMapPosition()), 0.0, lane.getDirection()), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
+            vehicles.add(new Car(new MovementStatus(new Position(lane, lane.getMapPosition()), 0.0, lane.getDirection()), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2));
 
             if (i == numberOfCars)
             {
-                player = new Player(new Car(new MovementStatus(new Position(lane, lane.getMapPosition()), 0.0, lane.getDirection()), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2.0));
+                player = new Player(new Car(new MovementStatus(new Position(lane, lane.getMapPosition()), 0.0, lane.getDirection()), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2));
             }
         }
 
@@ -97,7 +97,7 @@ public class GameEngine implements MovementControl {
                 if (vehicle == otherCars.get(i)) continue;
                 if (oldPos.getPoint().lessThan(otherCars.get(i).getMovementStatus().getPosition().getPoint())) return false;
             }
-            otherCars = checkRegion(new Car(new MovementStatus(newPosition, 0.0, vehicle.getMovementStatus().getDirection()), "Imaginary", 0.0, vehicle.getWeight(), 0.0, new Reputation(), new DamageStatus(1.0), 1.0), vehicles);
+            otherCars = checkRegion(new Car(new MovementStatus(newPosition, 0.0, vehicle.getMovementStatus().getDirection()), "Imaginary", 0.0, vehicle.getWeight(), 0.0, new Reputation(), new DamageStatus(1.0), 1), vehicles);
             for (int i = 0; i < otherCars.stream().count(); i++) {
                 if (oldPos.getPoint().lessThan(otherCars.get(i).getMovementStatus().getPosition().getPoint())) return false;
             }
