@@ -84,7 +84,11 @@ public class GameEngine implements MovementControl {
 
         if (element.getType() == "Lane") {
             Lane lane = (Lane) element;
-            
+            if (lane.pointOnLane(newPosition)) {
+
+            } else {
+                newPosition = new Position(lane.getRoad().getIntersections().get(1), lane.getRoad().getIntersections().get(1).getMapPosition());
+            }
         }
         if (element.equals(newElement)) {
             ArrayList<Vehicle> otherCars = checkRegion(vehicle, vehicles);

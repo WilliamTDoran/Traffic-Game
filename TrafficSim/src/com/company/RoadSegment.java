@@ -39,7 +39,7 @@ public class RoadSegment {
         length = abs(length);
 
         for (int i = 0; i < lanes; i++) {
-            this.lanes.add(new Lane(from.getMapPosition(), length, direction));
+            this.lanes.add(new Lane(from.getMapPosition(), length, direction, this));
         }
         System.out.println("New road created between " + from + ", & " + to + ", with " + lanes + " lanes");
     }
@@ -56,7 +56,6 @@ public class RoadSegment {
         }
         if (o == null || getClass() != o.getClass()) return false;
         RoadSegment that = (RoadSegment) o;
-        boolean equals = false;
         return Objects.equals(lanes, that.lanes);
     }
 

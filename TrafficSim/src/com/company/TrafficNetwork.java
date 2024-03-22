@@ -65,6 +65,7 @@ public class TrafficNetwork {
                     }
                 }
             }
+            readFile.close();
             /*for (int i = 0; i< intersectionNames.size() && i < intersections.size(); i++) {
                 System.out.println(intersectionNames.get(i) + ", " + intersections.get(i));
             }*/

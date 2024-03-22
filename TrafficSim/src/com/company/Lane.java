@@ -1,17 +1,18 @@
 package com.company;
 
-import java.util.Objects;
-
 public class Lane extends TrafficElement{
     private double length;
     private Direction direction;
+    private RoadSegment road;
 
     public Direction getDirection() { return direction; }
+    public RoadSegment getRoad() { return road; }
 
-    protected Lane(Point position, double length, Direction direction) {
+    protected Lane(Point position, double length, Direction direction, RoadSegment road) {
         super(position);
         this.length = length;
         this.direction = direction;
+        this.road = road;
         type = "Lane";
     }
 
