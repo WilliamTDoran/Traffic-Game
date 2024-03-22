@@ -12,6 +12,8 @@ public class GameEngine implements MovementControl {
     private MovementControl movementControl;
     private ChallengeHandle challengeHandle;
     private int turnCount;
+    
+    private Random rand;
 
     public static GameEngine instance;
 
@@ -24,8 +26,8 @@ public class GameEngine implements MovementControl {
         if (instance == null) {
             instance = this;
         }
+        rand = new Random();
         int numberOfCars = 5; //does not include the player
-        Random rand = new Random();
         for (int i = 0; i < numberOfCars; i++) {
             int road = rand.nextInt((int)trafficNetwork.getRoads().stream().count());
             Lane lane = trafficNetwork.getRoads().get(road).getLanes().get(rand.nextInt((int)trafficNetwork.getRoads().get(road).getLanes().stream().count()));
@@ -63,6 +65,7 @@ public class GameEngine implements MovementControl {
             Position newPos = new MovementStatus(vehicles.get(i)).getPosition();
             vehicles.get(i).move(validateMoveChoice(vehicles.get(i), newPos));
         }
+        TurnCars();
         return vehicles;
     }
 
@@ -101,6 +104,7 @@ public class GameEngine implements MovementControl {
             }
         } else if (element.getType() == "Intersection"){
             Intersection intersection = (Intersection) element;
+            vehicle.MovementStatus().setIntendedDirection(intersection.getRoads().get(rand.nextInt(intersection.getRoads().size())).getLanes().get(0).getDirection());
             newPosition = oldPos;
             return true;
         }
@@ -206,20 +210,50 @@ public class GameEngine implements MovementControl {
             case("L"):
                 if (atIntersection)
                 {
-                    Turn();
+                    player.getVehicle().MovementStatus().setIntendedDirection(Direction.East);//Change to Left / right
                 }
                 break;
             case("R"):
                 if (atIntersection)
                 {
-                    Turn();
+                    player.getVehicle().MovementStatus().setIntendedDirection(Direction.West);//Change to Left / right
                 }
                 break;
         }
     }
 
-    private void Turn()
+    private void TurnCars()
     {
+        for (int i=0; i<trafficNetwork.getIntersections().size(); i++) {
+            Intersection intersection = trafficNetwork.getIntersections().get(i);
+            if (trafficNetwork.checkNumberVehiclesAtIntersection(intersection, vehicles) > 1) {
 
+            } else if (trafficNetwork.checkNumberVehiclesAtIntersection(intersection, vehicles) == 1) {
+                boolean doneCar = false;
+                for (int j = 0; j < intersection.getRoads().size(); j++) {
+                    ArrayList<Vehicle> vehiclesinLane = new ArrayList<Vehicle>();
+                    for (int k = 0; k < vehicles.size(); k++) {
+                        if (intersection.getRoads().get(j).equals(vehicles.get(i).MovementStatus().getPosition().getTrafficElement()) && vehicles.get(k).getMovementStatus().getPosition().equals(intersection.getMapPosition())) {
+                            vehiclesinLane.add(vehicles.get(k));
+                        }
+                    }
+                    if (vehiclesinLane.size() < intersection.getRoads().get(j).getLanes().size()) {
+                        for (int k = 0; k < intersection.getRoads().get(j).getLanes().size(); k++) {
+                            for (int l = 0; l < vehiclesinLane.size(); l++) {
+                                if (!vehiclesinLane.get(l).MovementStatus().getPosition().getTrafficElement().equals(intersection.getRoads().get(j).getLanes().get(k))) {
+                                    vehiclesinLane.get(l).MovementStatus().setPosition(new Position(intersection.getRoads().get(j).getLanes().get(k), intersection.getRoads().get(j).getLanes().get(k).getMapPosition()));
+                                    doneCar = true;
+                                    break;
+                                }
+                            }
+                            if (doneCar) break;
+                        }
+                    } else if (j == intersection.getRoads().size()-1) {
+                        //damage the lone car & damage it's reputation
+                    }
+                    if (doneCar) break;
+                }
+            }
+        }
     }
 }
