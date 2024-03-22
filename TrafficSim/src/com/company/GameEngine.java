@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class GameEngine implements MovementControl {
     private TrafficNetwork trafficNetwork;
+    private VehicleFactory vehicleFactory;
     private ArrayList<Vehicle> vehicles;
     private Player player;
     private MovementControl movementControl;
@@ -18,6 +19,7 @@ public class GameEngine implements MovementControl {
 
     GameEngine() {
         trafficNetwork = new TrafficNetwork();
+        vehicleFactory = new VehicleFactory();
         vehicles = new ArrayList<Vehicle>();
         if (instance == null) {
             instance = this;
@@ -27,7 +29,7 @@ public class GameEngine implements MovementControl {
         for (int i = 0; i < numberOfCars + 1; i++) {
             int road = rand.nextInt((int)trafficNetwork.getRoads().stream().count());
             Lane lane = trafficNetwork.getRoads().get(road).getLanes().get(rand.nextInt((int)trafficNetwork.getRoads().get(road).getLanes().stream().count()));
-            vehicles.add(new Car(new MovementStatus(new Position(lane, lane.getMapPosition()), 0.0, lane.getDirection()), "Red", 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), 2));
+            vehicles.add(vehicleFactory.CreateVehicle(new MovementStatus(new Position(lane, lane.getMapPosition()), 0.0, lane.getDirection())));
 
             if (i == numberOfCars)
             {

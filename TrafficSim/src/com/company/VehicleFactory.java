@@ -15,7 +15,7 @@ public class VehicleFactory
     {
         int select = rand.nextInt(10);
 
-        Vehicle result;
+        Vehicle result = null;
         String color = vehicleColor();
 
         if (select <= 6) //car
@@ -25,14 +25,35 @@ public class VehicleFactory
         }
         else if (select == 9) //bus
         {
-
+            int numPassengers = rand.nextInt(40);
+            result = new Bus(stat, color, 2.5, 6.0, 0.6, new Reputation(), new DamageStatus(400.0), numPassengers);
         }
         else //truck
         {
-
+            double cargoAmount = rand.nextDouble() * 100;
+            result = new Truck(stat, color, 4.0, 8.0, 0.8, new Reputation(), new DamageStatus(500.0), cargoAmount);
         }
 
-        return null;
+        return result;
+    }
+
+    public Car CreateCar(MovementStatus stat)
+    {
+        String color = vehicleColor();
+        int numDoors = (rand.nextInt(1) + 1) * 2; //2 or 4
+        return new Car(stat, color, 1.0, 1.0, 1.0, new Reputation(), new DamageStatus(100.0), numDoors);
+    }
+    public Bus CreateBus(MovementStatus stat)
+    {
+        String color = vehicleColor();
+        int numPassengers = rand.nextInt(40);
+        return new Bus(stat, color, 2.5, 6.0, 0.6, new Reputation(), new DamageStatus(400.0), numPassengers);
+    }
+    public Truck CreateTruck(MovementStatus stat)
+    {
+        String color = vehicleColor();
+        double cargoAmount = rand.nextDouble() * 100;
+        return new Truck(stat, color, 4.0, 8.0, 0.8, new Reputation(), new DamageStatus(500.0), cargoAmount);
     }
 
     private String vehicleColor()
