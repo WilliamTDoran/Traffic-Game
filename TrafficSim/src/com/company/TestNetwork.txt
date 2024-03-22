@@ -1,12 +1,12 @@
-[Interection1] (0, 0)
-[Bubbles] (5, 0)
-[idk] (5, 5)
-[theseAreNames] (0, 5)
-[Bucky] (-5, 0)
-Interection1, Bubbles, 2
-Bubbles, idk, 1
-idk, theseAreNames, 2
-theseAreNames, Interection1, 2
-Interection1, theseAreNames, 2
-Bucky, Interection1, 3
-Interection1, Bucky, 3
+<intersect>Interection1<\intersect> <X>0<\X> <Y>0<\Y>
+<intersect> Bubbles <\intersect> <X>  5   <\X>    <Y>0<\Y>
+<intersect> idk <\intersect>  <X>5<\X><Y> 5<\Y>
+<intersect>theseAreNames<\intersect> <X>0<\X><Y> 5<\Y>
+<intersect>BuckyBarnes<\intersect> <X>-5<\X><Y> 0<\Y>
+<connect>Interection1<intersect>Bubbles<\connect> 2
+<connect>Bubbles   <intersect>  idk<\connect> 1
+<connect>idk<intersect> theseAreNames<\connect> 2
+<connect>theseAreNames<intersect> Interection1<\connect> 2
+<connect>Interection1 <intersect> theseAreNames<\connect> 2
+<connect>BuckyBarnes<intersect> Interection1<\connect> 3
+<connect>Interection1<intersect>BuckyBarnes<\connect> 3

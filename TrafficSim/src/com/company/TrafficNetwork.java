@@ -23,29 +23,29 @@ public class TrafficNetwork {
             intersections = new ArrayList<>();
             roads = new ArrayList<>();
             while (readFile.hasNextLine()) {
-                String data = readFile.nextLine();
-                if (data.startsWith("[")) { // new intersection
+                String data = readFile.nextLine().toLowerCase();
+                if (data.startsWith("<intersect>")) { // new intersection
                     try {
-                        intersectionNames.add(data.substring(1,data.indexOf(']')));
-                        int start = data.indexOf('(') + 1;
-                        int end = data.indexOf(',');
-                        int x = Integer.parseInt(data.substring(start, end));
-                        start = end + 2;
-                        end = data.indexOf(')');
-                        int y = Integer.parseInt(data.substring(start, end));
+                        intersectionNames.add(data.substring(11,data.indexOf("<\\intersect>")).trim());
+                        int start = data.indexOf("<x>") + 3;
+                        int end = data.indexOf("<\\x>");
+                        int x = Integer.parseInt(data.substring(start, end).trim());
+                        start = data.indexOf("<x>")+3;
+                        end = data.indexOf("<\\x>");
+                        int y = Integer.parseInt(data.substring(start, end).trim());
                         Point point = new Point(x, y);
                         intersections.add(new Intersection(point));
                     } catch (NumberFormatException e) {
                         System.out.println("Data set \"" + data + "\" does not contain valid data entries");
                     }
-                } else { // connects 2 intersections
+                } else if (data.startsWith("<connect>")){ // connects 2 intersections
                     try {
-                        int end = data.indexOf(',');
-                        String intersectionFrom = data.substring(0, end);
-                        int start = end;
-                        end = data.indexOf(',', start+1);
-                        String intersectionTo = data.substring(start+2, end);
-                        int numLanes = Integer.parseInt(data.substring(end+2));
+                        int end = data.indexOf("<intersect>");
+                        String intersectionFrom = data.substring(10, end).trim();
+                        int start = end+12;
+                        end = data.indexOf("<\\connect>");
+                        String intersectionTo = data.substring(start, end).trim();
+                        int numLanes = Integer.parseInt(data.substring(end+10).trim());
                         start = -1;
                         end = -1;
                         for (int i = 0; i< intersectionNames.size() && i < intersections.size(); i++) {
