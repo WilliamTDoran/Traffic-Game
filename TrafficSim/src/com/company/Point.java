@@ -16,4 +16,8 @@ public class Point {
     public boolean lessThan(Point p) {
         return (x - p.X() <= 0) && y - p.Y() <= 0;
     }
+
+    public boolean equals(Point p) {
+        return p.X() == x && p.Y() == y;
+    }
 }
