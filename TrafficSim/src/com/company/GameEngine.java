@@ -33,10 +33,10 @@ public class GameEngine implements MovementControl {
             Lane lane = trafficNetwork.getRoads().get(road).getLanes().get(rand.nextInt((int)trafficNetwork.getRoads().get(road).getLanes().stream().count()));
             vehicles.add(vehicleFactory.CreateVehicle(new MovementStatus(new Position(lane, lane.getMapPosition()), 0.0, lane.getDirection())));
 
-            /*if (i == numberOfCars)
+            if (i == numberOfCars)
             {
                 player = new Player(vehicleFactory.CreateCar(new MovementStatus(new Position(lane, lane.getMapPosition()), 0.0, lane.getDirection())));
-            }*/
+            }
         }
 
         while (true)
@@ -262,7 +262,7 @@ public class GameEngine implements MovementControl {
                     //if there isn't space in the lanes
                     } else if (j == intersection.getRoads().size()-1) {
                         //damage the lone car & damage it's reputation
-                        
+
                     }
                     if (doneCar) break;
                 }

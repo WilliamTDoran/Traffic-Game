@@ -41,8 +41,8 @@ public class TrafficNetwork {
                 } else if (data.startsWith("<connect>")){ // connects 2 intersections
                     try {
                         int end = data.indexOf("<intersect>");
-                        String intersectionFrom = data.substring(10, end).trim();
-                        int start = end+12;
+                        String intersectionFrom = data.substring(9, end).trim();
+                        int start = end+11;
                         end = data.indexOf("<\\connect>");
                         String intersectionTo = data.substring(start, end).trim();
                         int numLanes = Integer.parseInt(data.substring(end+10).trim());
