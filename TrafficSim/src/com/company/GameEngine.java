@@ -229,6 +229,7 @@ public class GameEngine implements MovementControl {
             Intersection intersection = trafficNetwork.getIntersections().get(i);
             //If there's more than 1 car, start a challenge
             if (trafficNetwork.checkNumberVehiclesAtIntersection(intersection, vehicles) > 1) {
+
             //Else if there's exactly one car
             } else if (trafficNetwork.checkNumberVehiclesAtIntersection(intersection, vehicles) == 1) {
                 boolean doneCar = false;
@@ -261,6 +262,7 @@ public class GameEngine implements MovementControl {
                     //if there isn't space in the lanes
                     } else if (j == intersection.getRoads().size()-1) {
                         //damage the lone car & damage it's reputation
+                        
                     }
                     if (doneCar) break;
                 }
