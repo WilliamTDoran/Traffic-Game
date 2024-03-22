@@ -26,15 +26,15 @@ public class GameEngine implements MovementControl {
         }
         int numberOfCars = 5; //does not include the player
         Random rand = new Random();
-        for (int i = 0; i < numberOfCars + 1; i++) {
+        for (int i = 0; i < numberOfCars; i++) {
             int road = rand.nextInt((int)trafficNetwork.getRoads().stream().count());
             Lane lane = trafficNetwork.getRoads().get(road).getLanes().get(rand.nextInt((int)trafficNetwork.getRoads().get(road).getLanes().stream().count()));
             vehicles.add(vehicleFactory.CreateVehicle(new MovementStatus(new Position(lane, lane.getMapPosition()), 0.0, lane.getDirection())));
 
-            if (i == numberOfCars)
+            /*if (i == numberOfCars)
             {
                 player = new Player(vehicleFactory.CreateCar(new MovementStatus(new Position(lane, lane.getMapPosition()), 0.0, lane.getDirection())));
-            }
+            }*/
         }
 
         while (true)
@@ -80,17 +80,34 @@ public class GameEngine implements MovementControl {
     {
         Position oldPos = vehicle.getMovementStatus().getPosition();
         TrafficElement element = oldPos.getTrafficElement();
-        TrafficElement newElement = newPosition.getTrafficElement();
 
         if (element.getType() == "Lane") {
             Lane lane = (Lane) element;
             if (lane.pointOnLane(newPosition)) {
-
+                ArrayList<Vehicle> otherCars = checkRegion(vehicle, vehicles);
+                boolean valid = true;
+                for (int i = 0; i < otherCars.stream().count(); i++) {
+                    if (vehicle == vehicles.get(i)) continue;
+                    if (!(oldPos.getPoint().lessThan(otherCars.get(i).getMovementStatus().getPosition().getPoint())
+                            && otherCars.get(i).getMovementStatus().getPosition().getPoint().lessThan(newPosition.getPoint()))) {
+                            valid = false;
+                        break;
+                    }
+                }
+                return valid;
             } else {
                 newPosition = new Position(lane.getRoad().getIntersections().get(1), lane.getRoad().getIntersections().get(1).getMapPosition());
+                return true;
             }
+        } else if (element.getType() == "Intersection"){
+            Intersection intersection = (Intersection) element;
+            newPosition = oldPos;
+            return true;
         }
-        if (element.equals(newElement)) {
+        return false;
+
+
+        /*if (element.equals(newElement)) {
             ArrayList<Vehicle> otherCars = checkRegion(vehicle, vehicles);
             for (int i = 0; i < otherCars.stream().count(); i++) {
                 if (vehicle == vehicles.get(i)) continue;
@@ -109,7 +126,7 @@ public class GameEngine implements MovementControl {
             }
             return true;
         }
-        return false;
+        return false;*/
     }
 
     public ArrayList<TrafficElement> probeMapSurroundings(Vehicle vehicle) {

@@ -5,14 +5,17 @@ public class MovementStatus
     private Position position;
     private Double speed;
     private Direction direction;
+    private Direction intendedDirection;
 
     public Position getPosition()   { return position; }
     public Double getSpeed()        { return speed; }
     public Direction getDirection() { return direction; }
+    public Direction getIntendedDirection() {return intendedDirection;}
 
     public void setPosition(Position position)      { this.position = position; }
     public void setSpeed(Double speed)              { this.speed = speed; }
     public void setDirection(Direction direction)   { this.direction = direction; }
+    public void setIntendedDirection(Direction intended) {this.intendedDirection = intended;}
 
     public MovementStatus(Position p, Double s, Direction d) {
         position = p;
